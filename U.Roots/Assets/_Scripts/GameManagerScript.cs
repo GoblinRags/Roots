@@ -21,6 +21,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private GameObject gameOverObject;
 
     private bool _isGameOver = false;
+    [SerializeField] private PlayerController pc;
     private void Awake()
     {
         if (Instance == null)
@@ -44,6 +45,7 @@ public class GameManagerScript : MonoBehaviour
         gameOverScoreText.gameObject.SetActive(true);
         gameOverObject.SetActive(true);
         _isGameOver = true;
+        pc.enabled = false;
     }
 
     public void Update()
