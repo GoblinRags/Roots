@@ -60,9 +60,14 @@ public class StartingRoot : MonoBehaviour
 
     public void WasHit()
     {
+        
+        GameManagerScript.Instance.AddScore(roots.Count);
+        if (WasCut)
+            return;
+        
         IsSpawning = false;
         WasCut = true;
-        GameManagerScript.Instance.AddScore(1);
+        
         foreach (Root root in roots)
         {
             //root.TurnOffRb();
