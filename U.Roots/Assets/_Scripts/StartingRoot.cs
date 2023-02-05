@@ -8,8 +8,9 @@ using Random = UnityEngine.Random;
 public class StartingRoot : MonoBehaviour
 {
     public GameObject[] RootPrefabs;
-
-
+    public GameObject EnemyPrefab;
+    //public Transform EnemyPosition;
+    private GameObject Enemy;
     public Transform Holder;
     private float _timer = 0f;
     public float _spawnTime = 1f;
@@ -23,10 +24,19 @@ public class StartingRoot : MonoBehaviour
     private bool HasHitCenter = false;
 
     private AudioManager am;
+
+    private void Awake()
+    {
+        //Root root = Instantiate(EnemyPrefab, EnemyPosition.transform.position, Quaternion.Euler(0f, 0f, 0f),
+        //    Holder).GetComponent<Root>();
+        //root.gameObject.transform.localRotation = quaternion.Euler(0f, 0f, 0f);
+    }
+
+
     private void Start()
     {
-        SpawnRoot();
-        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        SpawnRoot(true);
+        //am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     
@@ -44,15 +54,23 @@ public class StartingRoot : MonoBehaviour
     }
 
 
-    public void SpawnRoot()
+    public void SpawnRoot(bool isStart = false)
     {
         //Root root = Instantiate(RootPrefabs[Random.Range(0, RootPrefabs.Length)], transform, );
         Root root = Instantiate(RootPrefabs[Random.Range(0, RootPrefabs.Length)], _currentPoint, Quaternion.Euler(0f, 0f, 0f),
             Holder).GetComponent<Root>();
         root.gameObject.transform.localRotation = quaternion.Euler(0f, 0f, 0f);
-        _currentPoint = root.EndTransform.transform.position;
         root.startingRoot = this;
+        if (isStart)
+        {
+            GameObject obj = Instantiate(EnemyPrefab, _currentPoint + new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f),
+                Holder);
+            obj.transform.localRotation = quaternion.Euler(0f, 0f, 0f);
+            Enemy = obj;
+        }
         
+        
+        _currentPoint = root.EndTransform.transform.position;
         roots.Add(root);
         //root.gameObject.transform.eulerAngles = new Vector3(0f, 0f, _angle);
 
@@ -65,6 +83,7 @@ public class StartingRoot : MonoBehaviour
         if (WasCut)
             return;
         
+        Destroy(Enemy);
         IsSpawning = false;
         WasCut = true;
         
@@ -78,15 +97,15 @@ public class StartingRoot : MonoBehaviour
         var randAud = Random.Range(0f, 1f);
         if (randAud < .33f)
         {
-            am.PlaySfx(AudioManager.Sound.Hit1);
+            AudioManager.Instance.PlaySfx(AudioManager.Sound.Hit1);
         }
         else if (randAud < .66f)
         {
-            am.PlaySfx(AudioManager.Sound.Hit2);
+            AudioManager.Instance.PlaySfx(AudioManager.Sound.Hit2);
         }
         else
         {
-            am.PlaySfx(AudioManager.Sound.Hit3);
+            AudioManager.Instance.PlaySfx(AudioManager.Sound.Hit3);
         }
 
         StartCoroutine(PlayBreaking(.05f));
