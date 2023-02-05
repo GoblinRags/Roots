@@ -12,6 +12,8 @@ public class RootSpawner : MonoBehaviour
     [SerializeField] public GameObject startRootPrefab;
 
     [SerializeField] private RootManager rootManager;
+
+    public Transform center;
     private void Update()
     {
         if (Keyboard.current.gKey.wasPressedThisFrame)
@@ -33,6 +35,7 @@ public class RootSpawner : MonoBehaviour
         startingRoot.Holder.eulerAngles = new Vector3(0f, 0f, angle);
         startingRoot._currentPoint = randPos;
         startingRoot._angle = angle;
+        startingRoot.rootSpawner = this;
         rootManager.AddRoot(startingRoot);
     }
 }
