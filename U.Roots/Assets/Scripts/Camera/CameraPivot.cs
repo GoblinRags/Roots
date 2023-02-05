@@ -9,24 +9,28 @@ public class CameraPivot : MonoBehaviour
     private PlayerController _playerController;
     private string enterDirection;
     
-    [SerializeField] private float speed;
+    private float speed;
     private float activeSpeed;
+    private bool decel;
 
     void Start()
     {
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-    }
-    
-    void Update()
-    {
+        speed = _playerController.moveSpeed * 15; // DO NOT CHANGE
         transform.position = center.position; // set pivot position the same as center of world
-        
-        Debug.Log(activeSpeed);
     }
 
-    void RotatePivot(string direction)
+    void RotatePivot(string direction, string lerpMode)
     {
-        activeSpeed = Mathf.Lerp(activeSpeed, 58f, 2f * Time.deltaTime);
+        switch (lerpMode)
+        {
+            case "Accelerate":
+                activeSpeed = Mathf.Lerp(activeSpeed, speed, 5f * Time.deltaTime);
+                break;
+            case "Decelerate":
+                activeSpeed = Mathf.Lerp(activeSpeed, 0, 2f * Time.deltaTime);
+                break;
+        }
         switch (direction)
         {
             case "Right":
@@ -38,12 +42,19 @@ public class CameraPivot : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (decel)
+        {
+            RotatePivot(enterDirection, "Decelerate");
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            enterDirection = _playerController.movementInput > 0 ? "Right" : "Left";
-            activeSpeed = speed;
+            if (_playerController.movementInput != 0) enterDirection = _playerController.movementInput > 0 ? "Right" : "Left";
         }
     }
 
@@ -51,15 +62,16 @@ public class CameraPivot : MonoBehaviour
     {
         if (other.CompareTag("Player") && _playerController.isMoving)
         {
+            decel = false;
             var movingDirection = _playerController.movementInput > 0 ? "Right" : "Left";
             if (movingDirection == enterDirection)
             {
-                RotatePivot(movingDirection);
+                RotatePivot(movingDirection, "Accelerate");
             }
         }
         else if (other.CompareTag("Player") && !_playerController.isMoving)
         {
-            RotatePivot(enterDirection);
+            decel = true;
         }
     }
     
@@ -67,8 +79,7 @@ public class CameraPivot : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            enterDirection = "";
-            activeSpeed = speed;
+            activeSpeed = 0;
         }
     }
 }
