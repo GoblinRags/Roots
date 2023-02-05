@@ -15,7 +15,10 @@ public class StartingRoot : MonoBehaviour
     private float _spawnTime = 1f;
     public Vector3 _currentPoint = new Vector3();
     public float _angle = 0f;
-    
+    public RootSpawner rootSpawner;
+    private List<Root> roots = new List<Root>();
+
+    private bool IsSpawning = true;
     private void Start()
     {
         SpawnRoot();
@@ -25,7 +28,7 @@ public class StartingRoot : MonoBehaviour
     public void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer >= _spawnTime)
+        if (_timer >= _spawnTime && IsSpawning)
         {
             _timer = 0f;
             SpawnRoot();
@@ -41,14 +44,21 @@ public class StartingRoot : MonoBehaviour
         root.gameObject.transform.localRotation = quaternion.Euler(0f, 0f, 0f);
         _currentPoint = root.EndTransform.transform.position;
         root.startingRoot = this;
+        
+        roots.Add(root);
         //root.gameObject.transform.eulerAngles = new Vector3(0f, 0f, _angle);
 
     }
 
     public void WasHit()
     {
-        //destroy object
-        
-        
+        IsSpawning = false;
+        foreach (Root root in roots)
+        {
+            root.TurnOffRb();
+            root.TurnOnPhysics();
+            root.TeleportAndRotate();
+        }
+
     }
 }
