@@ -82,5 +82,11 @@ MonoBehaviour:
   - {fileID: 3778492083853914049, guid: ac95bea5433c6a14e9148d5b09ec4f53, type: 3}
   - {fileID: 3778492083853914049, guid: 5d78feb79611e0c4f847dbca60be572e, type: 3}
   - {fileID: 3778492083853914049, guid: 11a5b30b80c6fbd409e2c15fa87f08ca, type: 3}
+  EnemyPrefab: {fileID: 3738303259336362768, guid: a141eb700bc2f2c40b33b00c2e3772e9, type: 3}
+  EnemyPosition: {fileID: 0}
   Holder: {fileID: 323628556273047586}
+  _spawnTime: 1
   _currentPoint: {x: 0, y: 0, z: 0}
+  _angle: 0
+  rootSpawner: {fileID: 0}
+  WasCut: 0

@@ -9,7 +9,6 @@ public class Root : MonoBehaviour
 {
     public Vector3 EndPoint { get; set; }
     public Transform EndTransform;
-
     [HideInInspector]public StartingRoot startingRoot;
     [SerializeField]private BoxCollider2D col;
 
