@@ -13,6 +13,11 @@ public class CameraPivot : MonoBehaviour
     private float activeSpeed;
     private bool decel;
 
+    [SerializeField] private GameObject fastParallax;
+    [SerializeField] private GameObject midParallax;
+    [SerializeField] private GameObject slowParallax;
+    [SerializeField] private GameObject cloud;
+
     void Start()
     {
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -35,9 +40,15 @@ public class CameraPivot : MonoBehaviour
         {
             case "Right":
                 transform.rotation = Quaternion.Euler(transform.eulerAngles - Vector3.forward * activeSpeed * Time.deltaTime);
+                fastParallax.transform.rotation = Quaternion.Euler(fastParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 15) * Time.deltaTime);
+                midParallax.transform.rotation = Quaternion.Euler(midParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 28) * Time.deltaTime);
+                slowParallax.transform.rotation = Quaternion.Euler(slowParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 40) * Time.deltaTime);
                 break;
             case "Left":
                 transform.rotation = Quaternion.Euler(transform.eulerAngles + Vector3.forward * activeSpeed * Time.deltaTime);
+                fastParallax.transform.rotation = Quaternion.Euler(fastParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 15) * Time.deltaTime);
+                midParallax.transform.rotation = Quaternion.Euler(midParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 28) * Time.deltaTime);
+                slowParallax.transform.rotation = Quaternion.Euler(slowParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 40) * Time.deltaTime);
                 break;
         }
     }
@@ -48,6 +59,8 @@ public class CameraPivot : MonoBehaviour
         {
             RotatePivot(enterDirection, "Decelerate");
         }
+        
+        cloud.transform.rotation = Quaternion.Euler(cloud.transform.eulerAngles - Vector3.forward * 2 * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
