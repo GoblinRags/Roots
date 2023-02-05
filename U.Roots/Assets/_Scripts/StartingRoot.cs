@@ -12,21 +12,26 @@ public class StartingRoot : MonoBehaviour
 
     public Transform Holder;
     private float _timer = 0f;
-    private float _spawnTime = 1f;
+    public float _spawnTime = 1f;
     public Vector3 _currentPoint = new Vector3();
     public float _angle = 0f;
     public RootSpawner rootSpawner;
     private List<Root> roots = new List<Root>();
 
     private bool IsSpawning = true;
+    public bool WasCut = false;
+    private bool HasHitCenter = false;
     private void Start()
     {
         SpawnRoot();
     }
 
+    
 
     public void Update()
     {
+        if (!IsSpawning)
+            return;
         _timer += Time.deltaTime;
         if (_timer >= _spawnTime && IsSpawning)
         {
@@ -53,12 +58,23 @@ public class StartingRoot : MonoBehaviour
     public void WasHit()
     {
         IsSpawning = false;
+        WasCut = true;
+        GameManagerScript.Instance.AddScore(1);
         foreach (Root root in roots)
         {
-            root.TurnOffRb();
+            //root.TurnOffRb();
             root.TurnOnPhysics();
             root.TeleportAndRotate();
         }
 
+    }
+
+    public void HitCenter()
+    {
+        HasHitCenter = true;
+        foreach (Root root in roots)
+        {
+            Destroy(root.gameObject);
+        }
     }
 }
