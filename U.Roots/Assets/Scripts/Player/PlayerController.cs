@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private AudioManager am;
+    private GameObject htp;
+    private bool htpClosed = false;
 
     [HideInInspector] public float movementInput;
     [HideInInspector] public bool isMoving;
@@ -26,11 +28,12 @@ public class PlayerController : MonoBehaviour
     
     void OnEnable()
     {
-        _inputs.Actions.Enable();
+        _inputs.UI.Enable();
     }
     void OnDisable()
     {
         _inputs.Actions.Disable();
+        _inputs.UI.Disable();
     }
     
     void SubscribeInputEvents()
@@ -40,6 +43,17 @@ public class PlayerController : MonoBehaviour
         _inputs.Actions.HorizontalMovements.performed += OnMovement;
         _inputs.Actions.HorizontalMovements.canceled += OnMovement;
         _inputs.Actions.Attack.performed += OnAttack;
+        _inputs.UI.Start.performed += ctx => CloseHTP();
+    }
+
+    void CloseHTP()
+    {
+        if (!htpClosed)
+        {
+            htp.SetActive(false);
+            _inputs.Actions.Enable();
+            htpClosed = true;
+        }
     }
 
     void AssignComponents()
@@ -51,6 +65,11 @@ public class PlayerController : MonoBehaviour
     {
         SubscribeInputEvents();
         AssignComponents();
+    }
+
+    void Start()
+    {
+        htp = GameObject.Find("How to play");
     }
 
     void FixedUpdate()
