@@ -64,22 +64,12 @@ public class CameraPivot : MonoBehaviour
         {
             decel = false;
             var movingDirection = _playerController.movementInput > 0 ? "Right" : "Left";
-            if (movingDirection == enterDirection)
-            {
-                RotatePivot(movingDirection, "Accelerate");
-            }
+            if (movingDirection == enterDirection) RotatePivot(movingDirection, "Accelerate");
+            else decel = true;
         }
         else if (other.CompareTag("Player") && !_playerController.isMoving)
         {
             decel = true;
-        }
-    }
-    
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            activeSpeed = 0;
         }
     }
 }
