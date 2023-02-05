@@ -63,7 +63,7 @@ public class StartingRoot : MonoBehaviour
         root.startingRoot = this;
         if (isStart)
         {
-            GameObject obj = Instantiate(EnemyPrefab, _currentPoint + new Vector3(-1f, .5f, 0f), Quaternion.Euler(0f, 0f, 0f),
+            GameObject obj = Instantiate(EnemyPrefab, _currentPoint + new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f),
                 Holder);
             obj.transform.localRotation = quaternion.Euler(0f, 0f, 0f);
             Enemy = obj;
