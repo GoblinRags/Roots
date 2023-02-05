@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,10 +50,13 @@ public class PlayerController : MonoBehaviour
         AssignComponents();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        rb.velocity = movementInput * transform.right * moveSpeed;
+        rb.MovePosition(transform.position + movementInput * transform.right * moveSpeed * Time.fixedDeltaTime);
+    }
 
+    private void Update()
+    {
         if (!canAttack)
         {
             attackTimer += Time.deltaTime;

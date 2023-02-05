@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 493240052}
-  speed: 30
 --- !u!61 &4526591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -419,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: 0
   isMoving: 0
-  moveSpeed: 4
+  moveSpeed: 3
   meleeBox: {fileID: 95701131}
   attackDelay: 0.5
 --- !u!1 &493240051
@@ -953,7 +952,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1009373496}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cb6a0909b4ffbeb4bb0f2207921c5b11, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
