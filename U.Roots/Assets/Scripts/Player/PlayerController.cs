@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private AudioManager am;
 
     [HideInInspector] public float movementInput;
     [HideInInspector] public bool isMoving;
@@ -68,8 +69,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isMoving) sr.gameObject.GetComponent<Animator>().Play("PlayerWalking");
-        else sr.gameObject.GetComponent<Animator>().Play("PlayerIdling");
+        sr.gameObject.GetComponent<Animator>().Play(isMoving ? "PlayerWalking": "PlayerIdling");
     }
 
     void OnMovement(InputAction.CallbackContext ctx)
@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
             Invoke("TurnOffMeleeBox", .15f);
             canAttack = false;
             attackTimer = 0;
+            am.PlaySfx(UnityEngine.Random.Range(0f, 1f) >= .5f ? AudioManager.Sound.Slash2 : AudioManager.Sound.SlashWind);
         }
     }
 

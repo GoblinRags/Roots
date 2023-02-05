@@ -21,9 +21,12 @@ public class StartingRoot : MonoBehaviour
     private bool IsSpawning = true;
     public bool WasCut = false;
     private bool HasHitCenter = false;
+
+    private AudioManager am;
     private void Start()
     {
         SpawnRoot();
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     
@@ -67,6 +70,19 @@ public class StartingRoot : MonoBehaviour
             root.TeleportAndRotate();
         }
 
+        var randAud = Random.Range(0f, 1f);
+        if (randAud < .33f)
+        {
+            am.PlaySfx(AudioManager.Sound.Hit1);
+        }
+        else if (randAud < .66f)
+        {
+            am.PlaySfx(AudioManager.Sound.Hit2);
+        }
+        else
+        {
+            am.PlaySfx(AudioManager.Sound.Hit3);
+        }
     }
 
     public void HitCenter()
