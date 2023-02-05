@@ -16,7 +16,7 @@ public class RootSpawner : MonoBehaviour
     public Transform center;
 
 
-    [SerializeField] private float timePerRound = 20f;
+    [SerializeField] private float timePerRound = 15f;
     private float numberOfSpawns = 1f;
     private float startSpawnTime = 5f;
     private float _timer = 0f;
@@ -41,7 +41,8 @@ public class RootSpawner : MonoBehaviour
         _spawnTimer += Time.deltaTime;
         if (_spawnTimer >= _spawnTime)
         {
-            SpawnObject();
+            for (int i = 0; i < numberOfSpawns; i++)
+                SpawnObject();
             _spawnTimer = 0f;
         }
 
