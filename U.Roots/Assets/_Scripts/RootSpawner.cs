@@ -14,13 +14,53 @@ public class RootSpawner : MonoBehaviour
     [SerializeField] private RootManager rootManager;
 
     public Transform center;
+
+
+    private float numberOfSpawns = 1f;
+    private float startSpawnTime = 5f;
+    private float _timer = 0f;
+    private float phase = 2;
+
+    private float rootChildSpawnTime = 1f;
+
+
+    private float _spawnTimer = 0f;
+    private float _spawnTime = 5f;
+    private void Awake()
+    {
+        SpawnObject();
+        SpawnObject();
+        SpawnObject();
+    }
+
+
     private void Update()
     {
-        if (Keyboard.current.gKey.wasPressedThisFrame)
+        _timer += Time.deltaTime;
+
+        _spawnTimer += Time.deltaTime;
+        if (_spawnTimer >= _spawnTime)
         {
             SpawnObject();
         }
+
+
+        if (_timer >= 60f)
+        {
+            NextPhase();
+            _timer = 0f;
+        }
     }
+
+    public void NextPhase()
+    {
+        phase += 1;
+        _spawnTime = startSpawnTime / (float)Math.Log10(phase);
+        numberOfSpawns = phase;
+    }
+    
+    
+    
 
     [SerializeField] private Vector2 Center;
     
@@ -36,6 +76,11 @@ public class RootSpawner : MonoBehaviour
         startingRoot._currentPoint = randPos;
         startingRoot._angle = angle;
         startingRoot.rootSpawner = this;
+        
+        //variables
+        startingRoot._spawnTime = rootChildSpawnTime;
+        
+        
         rootManager.AddRoot(startingRoot);
     }
 }
