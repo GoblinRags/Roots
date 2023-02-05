@@ -16,6 +16,7 @@ public class CameraPivot : MonoBehaviour
     [SerializeField] private GameObject fastParallax;
     [SerializeField] private GameObject midParallax;
     [SerializeField] private GameObject slowParallax;
+    [SerializeField] private GameObject cloud;
 
     void Start()
     {
@@ -58,6 +59,8 @@ public class CameraPivot : MonoBehaviour
         {
             RotatePivot(enterDirection, "Decelerate");
         }
+        
+        cloud.transform.rotation = Quaternion.Euler(cloud.transform.eulerAngles - Vector3.forward * 2 * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
