@@ -1812,6 +1812,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7651573302973562950, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651573303139262415, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651573303258118837, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651573303461745604, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651573303557314468, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651573303902150516, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651573304074773301, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7651573304418693306, guid: 7a38cf7f9a050e44d97042918bf8080e, type: 3}
       propertyPath: m_RootOrder
       value: 3
