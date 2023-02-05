@@ -42,6 +42,7 @@ public class RootSpawner : MonoBehaviour
         if (_spawnTimer >= _spawnTime)
         {
             SpawnObject();
+            _spawnTimer = 0f;
         }
 
 

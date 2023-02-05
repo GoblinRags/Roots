@@ -30,7 +30,7 @@ public class StartingRoot : MonoBehaviour
 
     public void Update()
     {
-        if (!IsSpawning)
+        if (!IsSpawning || WasCut || HasHitCenter)
             return;
         _timer += Time.deltaTime;
         if (_timer >= _spawnTime && IsSpawning)
