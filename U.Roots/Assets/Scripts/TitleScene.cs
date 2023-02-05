@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class TitleScene : MonoBehaviour
 {
     private PlayerInputs _inputs;
+    [SerializeField] private GameObject howToPlay;
+    private bool htpShowed = false;
     
     void OnEnable()
     {
@@ -25,6 +27,14 @@ public class TitleScene : MonoBehaviour
 
     void StartGame(InputAction.CallbackContext ctx)
     {
-        SceneManager.LoadScene("Steve Scene");
+        if (!htpShowed)
+        {
+            howToPlay.SetActive(true);
+            htpShowed = true;
+        }
+        else
+        {
+            SceneManager.LoadScene("Steve Scene");
+        }
     }
 }
