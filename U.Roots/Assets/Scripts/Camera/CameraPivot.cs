@@ -17,10 +17,14 @@ public class CameraPivot : MonoBehaviour
     [SerializeField] private GameObject midParallax;
     [SerializeField] private GameObject slowParallax;
     [SerializeField] private GameObject cloud;
+    [SerializeField] private GameObject fastParallaxNight;
+    [SerializeField] private GameObject midParallaxNight;
+    [SerializeField] private GameObject slowParallaxNight;
+    [SerializeField] private GameObject cloudNight;
 
     void Start()
     {
-        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         speed = _playerController.moveSpeed * 15; // DO NOT CHANGE
         transform.position = center.position; // set pivot position the same as center of world
     }
@@ -43,12 +47,18 @@ public class CameraPivot : MonoBehaviour
                 fastParallax.transform.rotation = Quaternion.Euler(fastParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 15) * Time.deltaTime);
                 midParallax.transform.rotation = Quaternion.Euler(midParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 28) * Time.deltaTime);
                 slowParallax.transform.rotation = Quaternion.Euler(slowParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 40) * Time.deltaTime);
+                fastParallaxNight.transform.rotation = Quaternion.Euler(fastParallaxNight.transform.eulerAngles - Vector3.forward * (activeSpeed / 15) * Time.deltaTime);
+                midParallaxNight.transform.rotation = Quaternion.Euler(midParallaxNight.transform.eulerAngles - Vector3.forward * (activeSpeed / 28) * Time.deltaTime);
+                slowParallaxNight.transform.rotation = Quaternion.Euler(slowParallaxNight.transform.eulerAngles - Vector3.forward * (activeSpeed / 40) * Time.deltaTime);
                 break;
             case "Left":
                 transform.rotation = Quaternion.Euler(transform.eulerAngles + Vector3.forward * activeSpeed * Time.deltaTime);
                 fastParallax.transform.rotation = Quaternion.Euler(fastParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 15) * Time.deltaTime);
                 midParallax.transform.rotation = Quaternion.Euler(midParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 28) * Time.deltaTime);
                 slowParallax.transform.rotation = Quaternion.Euler(slowParallax.transform.eulerAngles - Vector3.forward * (activeSpeed / 40) * Time.deltaTime);
+                fastParallaxNight.transform.rotation = Quaternion.Euler(fastParallaxNight.transform.eulerAngles - Vector3.forward * (activeSpeed / 15) * Time.deltaTime);
+                midParallaxNight.transform.rotation = Quaternion.Euler(midParallaxNight.transform.eulerAngles - Vector3.forward * (activeSpeed / 28) * Time.deltaTime);
+                slowParallaxNight.transform.rotation = Quaternion.Euler(slowParallaxNight.transform.eulerAngles - Vector3.forward * (activeSpeed / 40) * Time.deltaTime);
                 break;
         }
     }
@@ -61,6 +71,7 @@ public class CameraPivot : MonoBehaviour
         }
         
         cloud.transform.rotation = Quaternion.Euler(cloud.transform.eulerAngles - Vector3.forward * 2 * Time.deltaTime);
+        cloudNight.transform.rotation = Quaternion.Euler(cloud.transform.eulerAngles - Vector3.forward * 2 * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

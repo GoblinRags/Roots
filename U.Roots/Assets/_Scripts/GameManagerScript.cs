@@ -45,7 +45,7 @@ public class GameManagerScript : MonoBehaviour
         gameOverScoreText.gameObject.SetActive(true);
         gameOverObject.SetActive(true);
         _isGameOver = true;
-        pc.enabled = false;
+        pc.gameObject.SetActive(false);
     }
 
     public void Update()
