@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 1400489329230488435}
+  am: {fileID: 0}
   movementInput: 0
   isMoving: 0
   moveSpeed: 3
@@ -345,6 +346,7 @@ GameObject:
   - component: {fileID: 9117751843747835019}
   - component: {fileID: 1400489329230488435}
   - component: {fileID: 4926033995570900730}
+  - component: {fileID: 4033388779001822589}
   m_Layer: 0
   m_Name: Char Sprite
   m_TagString: Untagged
@@ -439,3 +441,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4033388779001822589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888004870995946163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8154d1ddaa7ae2a4faa3748808f5f7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
