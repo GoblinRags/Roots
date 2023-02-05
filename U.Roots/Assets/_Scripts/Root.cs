@@ -19,7 +19,7 @@ public class Root : MonoBehaviour
 
     public void TurnOffRb()
     {
-        col.enabled = false;
+        //col.enabled = false;
         
     }
 
@@ -39,12 +39,19 @@ public class Root : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             startingRoot.WasHit();
-            Debug.Log("Was hit");
         }
 
         if (col.gameObject.CompareTag("Finish"))
         {
-            //game over
+            if (startingRoot.WasCut)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                //game over
+                startingRoot.HitCenter();
+            }
             
         }
     }
