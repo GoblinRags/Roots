@@ -52,7 +52,7 @@ public class CameraPivot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.name == "Player")
         {
             if (_playerController.movementInput != 0) enterDirection = _playerController.movementInput > 0 ? "Right" : "Left";
         }
@@ -60,14 +60,14 @@ public class CameraPivot : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && _playerController.isMoving)
+        if (other.gameObject.name == "Player" && _playerController.isMoving)
         {
             decel = false;
             var movingDirection = _playerController.movementInput > 0 ? "Right" : "Left";
             if (movingDirection == enterDirection) RotatePivot(movingDirection, "Accelerate");
             else decel = true;
         }
-        else if (other.CompareTag("Player") && !_playerController.isMoving)
+        else if (other.gameObject.name == "Player" && !_playerController.isMoving)
         {
             decel = true;
         }

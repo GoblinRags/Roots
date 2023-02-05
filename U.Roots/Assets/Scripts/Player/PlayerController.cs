@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputs _inputs;
 
     private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer sr;
 
     [HideInInspector] public float movementInput;
     [HideInInspector] public bool isMoving;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("Attack")]
     private bool canAttack = true;
     [SerializeField] private Collider2D meleeBox;
+    [SerializeField] private SpriteRenderer sickle;
     [SerializeField] private float attackDelay;
     private float attackTimer;
     
@@ -65,12 +67,16 @@ public class PlayerController : MonoBehaviour
                 canAttack = true;
             }
         }
+
+        if (isMoving) sr.gameObject.GetComponent<Animator>().Play("PlayerWalking");
+        else sr.gameObject.GetComponent<Animator>().Play("PlayerIdling");
     }
 
     void OnMovement(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<float>();
         isMoving = movementInput != 0;
+        sr.flipX = movementInput > 0;
     }
 
     void OnAttack(InputAction.CallbackContext ctx)
@@ -78,7 +84,8 @@ public class PlayerController : MonoBehaviour
         if (canAttack)
         {
             meleeBox.gameObject.SetActive(true);
-            Invoke("TurnOffMeleeBox", .1f);
+            sickle.gameObject.GetComponent<Animator>().Play("Sickle");
+            Invoke("TurnOffMeleeBox", .15f);
             canAttack = false;
             attackTimer = 0;
         }
