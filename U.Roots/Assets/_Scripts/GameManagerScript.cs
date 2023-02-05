@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -11,6 +13,14 @@ public class GameManagerScript : MonoBehaviour
 
     private int score;
     [SerializeField]private TextMeshProUGUI scoreText;
+
+    //[SerializeField] private TextMeshProUGUI gameOverText;
+
+    [SerializeField] private TextMeshProUGUI gameOverScoreText;
+
+    [SerializeField] private GameObject gameOverObject;
+
+    private bool _isGameOver = false;
     private void Awake()
     {
         if (Instance == null)
@@ -24,5 +34,23 @@ public class GameManagerScript : MonoBehaviour
     {
         score += add;
         scoreText.text = score.ToString();
+    }
+
+    public void GameOver()
+    {
+        //gameOverText.gameObject.SetActive(true);
+        scoreText.text = "";
+        gameOverScoreText.text = score.ToString();
+        gameOverScoreText.gameObject.SetActive(true);
+        gameOverObject.SetActive(true);
+        _isGameOver = true;
+    }
+
+    public void Update()
+    {
+        if (_isGameOver && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
