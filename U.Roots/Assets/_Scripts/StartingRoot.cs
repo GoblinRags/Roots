@@ -109,7 +109,10 @@ public class StartingRoot : MonoBehaviour
     
     public void HitCenter()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.Sound.Shrivelling, .05f);
+        AudioManager.Instance.PlaySfx(AudioManager.Sound.Breaking, .05f);
         HasHitCenter = true;
+        GameManagerScript.Instance.GameOver();
         foreach (Root root in roots)
         {
             Destroy(root.gameObject);
