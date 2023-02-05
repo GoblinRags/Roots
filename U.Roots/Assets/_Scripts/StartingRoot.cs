@@ -88,8 +88,25 @@ public class StartingRoot : MonoBehaviour
         {
             am.PlaySfx(AudioManager.Sound.Hit3);
         }
+
+        StartCoroutine(PlayBreaking(.05f));
+        StartCoroutine(PlayShrivel(.15f));
     }
 
+    public IEnumerator PlayShrivel(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioManager.Instance.PlaySfx(AudioManager.Sound.Shrivelling, .05f);
+        
+    }
+    
+    public IEnumerator PlayBreaking(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioManager.Instance.PlaySfx(AudioManager.Sound.Breaking, .05f);
+        
+    }
+    
     public void HitCenter()
     {
         HasHitCenter = true;
