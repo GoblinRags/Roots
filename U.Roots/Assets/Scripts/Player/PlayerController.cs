@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private PlayerInputs _inputs;
 
     private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private AudioManager am;
 
     [HideInInspector] public float movementInput;
     [HideInInspector] public bool isMoving;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Attack")]
     private bool canAttack = true;
     [SerializeField] private Collider2D meleeBox;
+    [SerializeField] private SpriteRenderer sickle;
     [SerializeField] private float attackDelay;
     private float attackTimer;
     
@@ -65,12 +68,15 @@ public class PlayerController : MonoBehaviour
                 canAttack = true;
             }
         }
+
+        sr.gameObject.GetComponent<Animator>().Play(isMoving ? "PlayerWalking": "PlayerIdling");
     }
 
     void OnMovement(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<float>();
         isMoving = movementInput != 0;
+        sr.flipX = movementInput > 0;
     }
 
     void OnAttack(InputAction.CallbackContext ctx)
@@ -78,9 +84,11 @@ public class PlayerController : MonoBehaviour
         if (canAttack)
         {
             meleeBox.gameObject.SetActive(true);
-            Invoke("TurnOffMeleeBox", .1f);
+            sickle.gameObject.GetComponent<Animator>().Play("Sickle");
+            Invoke("TurnOffMeleeBox", .15f);
             canAttack = false;
             attackTimer = 0;
+            am.PlaySfx(UnityEngine.Random.Range(0f, 1f) >= .5f ? AudioManager.Sound.Slash2 : AudioManager.Sound.SlashWind);
         }
     }
 
