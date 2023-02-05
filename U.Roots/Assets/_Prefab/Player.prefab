@@ -173,7 +173,7 @@ MonoBehaviour:
   am: {fileID: 0}
   movementInput: 0
   isMoving: 0
-  moveSpeed: 3
+  moveSpeed: 5
   meleeBox: {fileID: 3718962789548108052}
   sickle: {fileID: 8049830349744708428}
   attackDelay: 0.5
