@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPhysics : MonoBehaviour
+public class RootPhysics : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField] private Transform center;
+    [HideInInspector] private Transform center;
 
     [Space(10)]
     [SerializeField] private float gravityScale;
 
+    [SerializeField] private Root root;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        if (center == null)
-        {
-            center = GameObject.Find("Core").transform;
-        }
+        center = root.startingRoot.rootSpawner.center;
     }
     
     void FixedUpdate()
