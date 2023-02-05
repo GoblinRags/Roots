@@ -170,6 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 493240052}
+  fastParallax: {fileID: 488192230}
+  midParallax: {fileID: 1253570643}
+  slowParallax: {fileID: 535926565}
 --- !u!61 &4526591
 BoxCollider2D:
   m_ObjectHideFlags: 0
